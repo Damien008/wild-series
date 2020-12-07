@@ -55,7 +55,8 @@ class CategoryController extends AbstractController
             $entityManager->persist($category);
             // Flush the persisted object
             $entityManager->flush();
-            // Finally redirect to categories list
+            // Finally redirect to categories lis
+            return $this->redirectToRoute('category_index');
         }
         // Render the form
         return $this->render('category/new.html.twig', [
