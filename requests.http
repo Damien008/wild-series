@@ -1,0 +1,4 @@
+POST http://localhost:8000/programs/new
+Content-Type: application/x-www-form-urlencoded
+
+program[title]=&program[summary]=
