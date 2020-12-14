@@ -147,7 +147,7 @@ class Program
     }
 
     /**
-     * @return Collection|Actor[]
+     * @return ArrayCollection|Actor[]
      */
     public function getActors(): Collection
     {
