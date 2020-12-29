@@ -3,14 +3,16 @@
 namespace App\Controller;
 
 
-use App\Entity\Program;
-use App\Entity\Episode;
 use App\Entity\Season;
+use App\Entity\Episode;
+use App\Entity\Program;
+use App\Service\Slugify;
+use App\Form\ProgramType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\ProgramType;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
 * @Route("/programs", name="program_")
@@ -41,7 +43,7 @@ class ProgramController extends AbstractController
      *
      * @Route("/new", name="new")
      */
-    public function new(Request $request) : Response
+    public function new(Request $request, Slugify $slugify) : Response
     {
         // Create a new Program Object
         $program = new Program();
@@ -54,6 +56,8 @@ class ProgramController extends AbstractController
             // Deal with the submitted data
             // Get the Entity Manager
             $entityManager = $this->getDoctrine()->getManager();
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
             // Persist Program Object
             $entityManager->persist($program);
             // Flush the persisted object
@@ -70,8 +74,8 @@ class ProgramController extends AbstractController
     /**
      * Getting a program by id
      *
-     * @Route("/show/{id<^[0-9]+$>}", name="show")
-     * @return Response
+     * @Route("/{slug}", name="show")
+     * @ParamConverter ("program", class="App\Entity\Program", options={"mapping": {"slug": "slug"}})
      */
     public function show(Program $program):Response
     {
@@ -90,7 +94,6 @@ class ProgramController extends AbstractController
 
     /**
      * @Route("/{program}/seasons/{season}", name="season_show")
-     * @return Response
      */
     public function showSeason(Program $program, Season $season): Response
     {
