@@ -12,10 +12,29 @@
             <h2> Episode#{{ episode.number}}: {{episode.title}} </h2>
                 
                 <p> {{ episode.synopsis}} </p>
-              
-   
   </div>
 </div>
+
+
+  <h3> Commentaires:</h3>
+    <div class=commentsblock>
+    <ul>
+        {% for comment in episode.comments %}
+          <div class="comment">
+            <li>autheur: {{comment.author.email}}</li>
+            <li>commentaire: {{comment.comment}}</li>
+            <li>note: {{comment.rate}}/5</li><br>
+          </div>
+        {% endfor %}
+    </ul>
+    </div>
+
+  <div class="addcomment">
+    {% if app.user %}
+      <h4>Ajouter un commentaire</h4>
+        {{ include('comment/_form.html.twig') }}
+    {% endif %}
+  </div>
 
 <a href="{{ path('program_index') }}">
     Retour à la liste des programmes

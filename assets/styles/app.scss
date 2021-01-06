@@ -1,6 +1,3 @@
-
-
-
 $theme-colors: (
   "primary": #ddcb27,
   "danger": #ff4136
@@ -9,4 +6,26 @@ $theme-colors: (
 
 body {
     background-color: #74a1dd;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid black;
+  border-radius: 5px 5px;
+  list-style: none;
+}
+
+.commentsblock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5%;
+}
+
+.addcomment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
