@@ -24,6 +24,9 @@
             <li>autheur: {{comment.author.email}}</li>
             <li>commentaire: {{comment.comment}}</li>
             <li>note: {{comment.rate}}/5</li><br>
+            {% if app.user == comment.author or is_granted("ROLE_ADMIN")%}
+              {{ include('comment/_delete_form.html.twig') }}
+            {% endif %}
           </div>
         {% endfor %}
     </ul>

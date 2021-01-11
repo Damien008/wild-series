@@ -29,11 +29,11 @@
 </ul>
   </div> 
 </div>
-  <a href="{{ path('season_new')}}">
-    Ajouter une Saison
-</a>  </br>
-<a href="{{ path('program_index') }}">
-    Retour à la liste des programmes
-</a>
+  <a href="{{ path('season_new')}}">Ajouter une Saison</a>  </br>
+
+{% if is_granted("ROLE_CONTRIBUTOR") %}
+  <a href="{{ path('program_edit', {'slug': program.slug }) }}">Editer la Série</a></br>
+{% endif %}
+<a href="{{ path('program_index') }}">Retour à la liste des programmes</a>
 
 {% endblock %}

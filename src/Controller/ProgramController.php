@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
 * @Route("/programs", name="program_")
@@ -63,6 +64,8 @@ class ProgramController extends AbstractController
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
             // Persist Program Object
+            // Set the program's owner
+            $program->setOwner($this->getUser());
             $entityManager->persist($program);
             // Flush the persisted object
             $entityManager->flush();
@@ -137,6 +140,32 @@ class ProgramController extends AbstractController
             'season' => $season,
             'episode' => $episode,
             'comment' => $comment,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{slug}/edit", name="edit", methods={"GET","POST"})
+     * 
+     */
+    public function edit(Request $request, Program $program): Response
+    {
+        // Check wether the logged in user is the owner of the program
+        if (!($this->getUser() == $program->getOwner())) {
+            // If not the owner, throws a 403 Access Denied exception
+            throw new AccessDeniedException('Only the owner can edit the program!');
+        }
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('program_index');
+        }
+
+        return $this->render('program/edit.html.twig', [
+            'program' => $program,
             'form' => $form->createView(),
         ]);
     }

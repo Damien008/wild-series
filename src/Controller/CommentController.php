@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/comment")
@@ -27,6 +29,7 @@ class CommentController extends AbstractController
 
     /**
      * @Route("/new", name="comment_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_CONTRIBUTOR")
      */
     public function new(Request $request): Response
     {
@@ -36,6 +39,7 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $comment->setAuthor($this->getUser());
             $entityManager->persist($comment);
             $entityManager->flush();
 
@@ -80,6 +84,8 @@ class CommentController extends AbstractController
 
     /**
      * @Route("/{id}", name="comment_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_CONTRIBUTOR")
+     * 
      */
     public function delete(Request $request, Comment $comment): Response
     {
