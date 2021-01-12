@@ -77,6 +77,9 @@ class ProgramController extends AbstractController
             $entityManager->persist($program);
             // Flush the persisted object
             $entityManager->flush();
+
+            // Once the form is submitted, valid and the data inserted in database, you can define the success flash message
+            $this->addFlash('success', 'The new program has been created');
             // Envoi de mail
             $email = (new Email())
                 ->from($this->getParameter('mailer_from'))
@@ -168,6 +171,8 @@ class ProgramController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'The new program has been edit');
 
             return $this->redirectToRoute('program_index');
         }
