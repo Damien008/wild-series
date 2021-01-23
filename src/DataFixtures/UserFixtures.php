@@ -18,30 +18,29 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-                // Création d’un utilisateur de type “contributeur” (= auteur)
-                $contributor = new User();
-                $contributor->setEmail('contributor@monsite.com');
-                $contributor->setRoles(['ROLE_CONTRIBUTOR']);
-                $contributor->setPassword($this->passwordEncoder->encodePassword(
-                    $contributor,
-                    'contributorpassword'
-                ));
-        
-                $manager->persist($contributor);
-        
-                // Création d’un utilisateur de type “administrateur”
-                $admin = new User();
-                $admin->setEmail('admin@monsite.com');
-                $admin->setRoles(['ROLE_ADMIN']);
-                $admin->setPassword($this->passwordEncoder->encodePassword(
-                    $admin,
-                    'adminpassword'
-                ));
-        
-                $manager->persist($admin);
-        
-                // Sauvegarde des 2 nouveaux utilisateurs :
+        // Création d’un utilisateur de type “contributeur” (= auteur)
+        $contributor = new User();
+        $contributor->setEmail('contributor@monsite.com');
+        $contributor->setRoles(['ROLE_CONTRIBUTOR']);
+        $contributor->setPassword($this->passwordEncoder->encodePassword(
+            $contributor,
+            'contributorpassword'
+        ));
 
+        $manager->persist($contributor);
+
+        // Création d’un utilisateur de type “administrateur”
+        $admin = new User();
+        $admin->setEmail('admin@monsite.com');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setPassword($this->passwordEncoder->encodePassword(
+            $admin,
+            'adminpassword'
+        ));
+
+        $manager->persist($admin);
+        $this->addReference('admin', $admin);
+        // Sauvegarde des 2 nouveaux utilisateurs :
         $manager->flush();
     }
 }

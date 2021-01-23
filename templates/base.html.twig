@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="/build/app.css">
+            <script src="https://kit.fontawesome.com/92d91ed006.js" crossorigin="anonymous"></script>
         {% endblock %}
         
     </head>
@@ -20,13 +21,22 @@
             {% endfor %}
         {% endfor %}
 
-        {% if app.user %}
-            {{ app.user.email }}
+        {#{% if app.user %}
+            Bonjour {{ app.user.email }}
                 <a href="{{ path ('profile_index')}}"> Voir mon profil </a>
                 <a href="{{ path('app_logout') }}"> Se déconnecter </a>
         {% else %}
             <a href="{{ path('app_login') }}"> Se connecter</a>
+        {% endif %}#}
+        {% if app.user %}
+            {% trans with {'%username%': app.user.email} %}
+                hello_username
+            {% endtrans %} !
+            <a href="{{ path('app_logout') }}"> {{ 'account.logout'|trans }}</a>
+        {% else %}
+            <a href="{{ path('app_login') }}"> {{ 'account.login'|trans }}</a>
         {% endif %}
+
         
         {% block body %}{% endblock %}
         {% block javascripts %}

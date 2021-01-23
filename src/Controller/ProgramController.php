@@ -12,6 +12,7 @@ use App\Form\CommentType;
 use App\Form\ProgramType;
 use App\Form\SearchPogramType;
 use App\Repository\ProgramRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -180,6 +181,27 @@ class ProgramController extends AbstractController
         return $this->render('program/edit.html.twig', [
             'program' => $program,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{slug}/watchlist", name="watchlist", methods={"GET","POST"})
+     * @ParamConverter ("program", class="App\Entity\Program", options={"mapping": {"slug": "slug"}})
+     * 
+     */
+    public function addToWatchlist(Request $request, Program $program, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->getUser()->getPrograms()->contains($program)) {
+            $this->getUser()->removeProgram($program);
+        }
+        else {
+            $this->getUser()->addProgram($program);
+        }
+
+        $entityManager->flush();
+
+        return $this->json([
+            'isInWatchlist' => $this->getUser()->isInWatchlist($program)
         ]);
     }
 
