@@ -226,6 +226,6 @@ class User implements UserInterface
 
     public function isInWatchlist(Program $program): bool
     {
-        return $this->watchlist->contains($program);
+        return $this->watchlist->contains($program);   
     }
 }
