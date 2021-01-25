@@ -1,3 +1,13 @@
-hello_username: Bonjour %username%
-account.logout: se déconnecter
-account.login: se connecter
+hello_username: 'Bonjour %username%'
+account.logout: 'se déconnecter'
+account.login: 'se connecter'
+Programs: Programmes
+Catégories: Catégories
+Add.show: 'Ajouter une série'
+Add.category: 'Ajouter une catégorie'
+Welcome.in.Wild.series: 'Bienvenue sur Wild Series !!'
+All.show: Toutes les séries
+Season: Saison
+Description: Description
+Year: Année
+language: langue

@@ -6,9 +6,9 @@
 <div class="media">
   <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
   <div class="media-body">
-    <h1 class="mt-0">Saison {{ season.number }}</h1>
-    <h2> Description </h2>
-    <p> Année: {{ season.year}} </p>
+    <h1 class="mt-0">{{'Season'|trans}} {{ season.number }}</h1>
+    <h2> {{'Description'|trans}} </h2>
+    <p> {{'Year'|trans}}: {{ season.year}} </p>
     <p>{{ season.description}}</p>
     
     {% for episode in episodes %}

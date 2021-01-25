@@ -1,3 +1,13 @@
-hello_username: hello %username%
-account.logout: account logout
-account.login: account login
+hello_username: 'hello %username%'
+account.logout: 'account logout'
+account.login: 'account login'
+Programs: Programs
+Catégories: Categories
+Add.show: 'Add show'
+Add.category: 'Add category'
+Welcome.in.Wild.series: 'Welcome in Wild series !!'
+All.show: All show
+Season: Season
+Description: Description
+Year: Year
+language: language
