@@ -7,33 +7,63 @@
   <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
   <div class="media-body">
     <h1 class="mt-0">{{ program.title }}</h1>
+    {% if app.user %}
+
+      <a id="watchlist" href="{{ path('program_watchlist', {'id': program.id})}}">
+        <i class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart"></i>
+      </a>
+
+    {% endif %}
+
     <p>{{ program.summary }}</p>
+
     <p>Catégorie : {{ program.category.name }}</p>
+
     {% for season in seasons %}
+       
         <h2> 
+      
             <a href="{{ path('program_season_show', {season: season.id, program: program.id}) }}">
+
               Saison {{season.number}}
+            
             </a>
+
         </h2>
+
     {% endfor %}
 
     <strong>Acteurs :</strong>
 <ul>
+
     {% for actor in program.actors %}
+
       <a href="{{ path('actor_show', { id: actor.id }) }}">
-        <li>{{ actor.name }} </li>    
+
+        <li>{{ actor.name }} </li>  
+
       </a>    
+
     {% else %}
+
         <li>Aucun acteur pour cette série</li>
+
     {% endfor %}
 </ul>
+
   </div> 
+
 </div>
+
   <a href="{{ path('season_new')}}">Ajouter une Saison</a>  </br>
 
+
 {% if is_granted("ROLE_CONTRIBUTOR") %}
+
   <a href="{{ path('program_edit', {'slug': program.slug }) }}">Editer la Série</a></br>
+
 {% endif %}
+
 <a href="{{ path('program_index') }}">Retour à la liste des programmes</a>
 
 {% endblock %}
