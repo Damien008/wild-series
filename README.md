@@ -16,3 +16,4 @@ démo quête 22 : https://www.awesomescreenshot.com/video/2332123?key=c512b03a14
 démo quête 23 : https://www.awesomescreenshot.com/video/2344949?key=36314337f8ad6e876ad72b5c5d8e75ed
 démo quête 24 : https://www.awesomescreenshot.com/video/2504937?key=55419871e327d08bb07fb11f669cda37
 démo quête 25 : https://www.awesomescreenshot.com/video/2506025?key=61e0dbb94c175589bdafefa4d51601bf
+démo quête 26 : https://www.awesomescreenshot.com/video/2514664?key=edaf96fd8bb12d1d38d641db3fc50ba4

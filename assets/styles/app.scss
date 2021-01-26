@@ -29,3 +29,17 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+
+.navbartop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+  color: black;
+}
+
+.navbartop a {
+  color: black;
+}
+

@@ -8,7 +8,7 @@
   {% for program in programs %}
   <div class="media-body">
     <h1 class="mt-0">{{ program.id}} 
-      <a href="{{ path("program_show", { id: program.id }) }}">
+      <a href="{{ path("program_show", { 'slug': program.slug }) }}">
         {{ program.title }}</h1>
       </a>
     <p>{{ program.summary }}</p>
