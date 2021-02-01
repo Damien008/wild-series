@@ -16,33 +16,26 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         'Walking Dead' => [
                             'summary' => 'Le policier Rick Grimes se réveille après un long coma. Il découvre avec effarement que le monde, ravagé par une épidémie, est envahi par les morts-vivants.',
                             'category' => 'category_4',
-                            'poster' => 'https://fr.web.img5.acsta.net/r_1920_1080/medias/nmedia/18/78/35/82/20303823.jpg',
                             ],
         'The Haunting Of Hill House' => [
                             'summary' => 'Plusieurs frères et sœurs qui, enfants, ont grandi dans la demeure qui allait devenir la maison hantée la plus célèbre des États-Unis, sont contraints de se réunir pour finalement affronter les fantômes de leur passé.',
                             'category' => 'category_4',
-                            'poster' => 'https://fr.web.img2.acsta.net/r_1920_1080/pictures/18/10/26/11/18/4789922.jpg',
                             ],
         'American Horror Story' => [
                             'summary' => 'A chaque saison, son histoire. American Horror Story nous embarque dans des récits à la fois poignants et cauchemardesques, mêlant la peur, le gore et le politiquement correct.',
                             'category' => 'category_4',
-                            'poster' => 'https://fr.web.img6.acsta.net/r_1920_1080/pictures/18/10/30/17/07/0996605.jpg',
                             ],
         'Love Death And Robots' => [
                             'summary' => 'Un yaourt susceptible, des soldats lycanthropes, des robots déchaînés, des monstres-poubelles, des chasseurs de primes cyborgs, des araignées extraterrestres et des démons assoiffés de sang : tout ce beau monde est réuni dans 18 courts métrages animés déconseillés aux âmes sensibles.',
                             'category' => 'category_4',
-                            'poster' => 'https://fr.web.img2.acsta.net/r_1920_1080/pictures/19/02/15/09/58/1377321.jpg',
                             ],
         'Penny Dreadful' => [
                             'summary' => 'Dans le Londres ancien, Vanessa Ives, une jeune femme puissante aux pouvoirs hypnotiques, allie ses forces à celles de Ethan, un garçon rebelle et violent aux allures de cowboy, et de Sir Malcolm, un vieil homme riche aux ressources inépuisables. Ensemble, ils combattent un ennemi inconnu, presque invisible, qui ne semble pas humain et qui massacre la population.',
                             'category' => 'category_4',
-                            'poster' => 'https://fr.web.img4.acsta.net/r_1920_1080/pictures/20/11/25/20/17/0498138.jpg',
                             ],
         'Fear The Walking Dead' => [
                             'summary' => 'La série se déroule au tout début de l épidémie relatée dans la série mère The Walking Dead et se passe dans la ville de Los Angeles, et non à Atlanta. Madison est conseillère dans un lycée de Los Angeles. Depuis la mort de son mari, elle élève seule ses deux enfants : Alicia, excellente élève qui découvre les premiers émois amoureux, et son grand frère Nick qui a quitté la fac et a sombré dans la drogue.',
                             'category' => 'categorie_4',
-                            'poster' => 'https://fr.web.img2.acsta.net/r_1920_1080/pictures/17/04/05/11/36/568191.jpg',
-
                             ],
 ];
     private $slugify;
@@ -67,7 +60,6 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setTitle($title);
             $program->setSlug($slugify->generate($title));
             $program->setSummary($data['summary']);
-            $program->setPoster($data['poster']);
             $program->setCategory($this->getReference('category_4'));
             $program->setOwner($this->getReference('admin'));
             $manager->persist($program);

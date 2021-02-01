@@ -2,17 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\ProgramRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProgramRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
- * @UniqueEntity("title",
- *      message="ce titre existe déjà")
+ * @UniqueEntity("title", message="ce titre existe déjà")
+ * @Vich\Uploadable
  */
 class Program
 {
@@ -40,6 +43,12 @@ class Program
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $poster;
+
+    /**
+     * @Vich\UploadableField(mapping="poster_file", fileNameProperty="poster")
+     * @var File
+     */
+    private $posterFile;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="programs")
@@ -71,6 +80,12 @@ class Program
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="watchlist")
      */
     private $users;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var Datetime
+     */
+    private $updateAt;
 
     public function __construct()
     {
@@ -119,7 +134,7 @@ class Program
 
         return $this;
     }
-
+    
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -236,6 +251,32 @@ class Program
         if ($this->users->removeElement($user)) {
             $user->removeWatchlist($this);
         }
+
+        return $this;
+    }
+
+    public function setPosterFile(File $posterFile = null):Program
+    {
+        $this->posterFile = $posterFile;
+        if ($posterFile) {
+            $this->updateAt = new DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getPosterFile(): ?File
+    {
+        return $this->posterFile;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->updateAt;
+    }
+
+    public function setUpdateAt(\DateTimeInterface $updateAt): self
+    {
+        $this->updateAt = $updateAt;
 
         return $this;
     }

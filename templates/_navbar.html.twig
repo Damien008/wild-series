@@ -4,14 +4,6 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="navbartopblock">
-    <ul>
-      <div class="navbartop">
-        {{ render(controller('App\\Controller\\DefaultController::navbartop')) }}
-      </div>
-    </ul>
-  </div>
-
   <a class="navbar-brand" href="{{path('app_index')}}">Home</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -27,6 +19,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{path('category_new')}}">{{'Add.category'|trans}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('actor_new')}}">Ajouter un acteur</a>
       </li>
       
       <div class="dropdown">

@@ -12,6 +12,13 @@
     <body>
     <header>
         {% include '_navbar.html.twig' %}
+        <div class="navbartopblock">
+    <ul>
+      <div class="navbartop">
+        {{ render(controller('App\\Controller\\DefaultController::navbartop')) }}
+      </div>
+    </ul>
+  </div>
     </header>
         {% for category, messages in app.flashes %}
             {% for message in messages %}
